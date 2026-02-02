@@ -20,24 +20,20 @@ export const handler: Handler = async (event) => {
       }
     }
 
-    // Obtener cliente de Supabase (con manejo de errores)
+    // Obtener cliente de Supabase (usa las mismas variables que el frontend)
     let supabaseAdmin
     try {
       supabaseAdmin = getSupabaseAdmin()
     } catch (envError: any) {
       console.error('Error de configuración:', envError)
-      console.error('SUPABASE_URL:', process.env.SUPABASE_URL ? 'Definida' : 'FALTANTE')
-      console.error('SUPABASE_SERVICE_ROLE_KEY:', process.env.SUPABASE_SERVICE_ROLE_KEY ? 'Definida' : 'FALTANTE')
       return {
         statusCode: 500,
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
-          message: 'Error de configuración del servidor. Verifica las variables de entorno en Netlify: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, JWT_SECRET',
+          message: 'Error de configuración. Verificá que VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY estén configuradas en Netlify (las mismas que usás para el frontend).',
           debug: envError.message,
-          hasSupabaseUrl: !!process.env.SUPABASE_URL,
-          hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
         }),
       }
     }

@@ -7,18 +7,15 @@ export function getSupabaseAdmin(): SupabaseClient {
     return supabaseAdminInstance
   }
 
-  const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL
-  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  // Usar las mismas variables que el frontend (las que ya funcionan)
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL
+  const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
 
-  if (!supabaseUrl) {
-    throw new Error('Falta SUPABASE_URL. Configurá esta variable en Netlify > Site settings > Environment variables. Puede ser la misma que VITE_SUPABASE_URL.')
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Faltan variables de Supabase. Usá las mismas que el frontend: VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY')
   }
 
-  if (!supabaseServiceKey) {
-    throw new Error('Falta SUPABASE_SERVICE_ROLE_KEY. Esta es diferente de VITE_SUPABASE_ANON_KEY. Encontrála en Supabase > Settings > API > service_role (secret).')
-  }
-
-  supabaseAdminInstance = createClient(supabaseUrl, supabaseServiceKey, {
+  supabaseAdminInstance = createClient(supabaseUrl, supabaseKey, {
     auth: {
       autoRefreshToken: false,
       persistSession: false,
