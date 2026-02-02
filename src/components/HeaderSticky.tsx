@@ -56,9 +56,11 @@ export default function HeaderSticky() {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-xl flex items-center justify-center">
-                <span className="text-white font-display font-bold text-lg md:text-xl">K</span>
-              </div>
+              <img
+                src="/images/logo.png"
+                alt="Keroro Store"
+                className="h-10 md:h-12 w-auto"
+              />
               <span className="font-display font-bold text-lg md:text-xl text-text hidden sm:block">
                 Keroro Store
               </span>
