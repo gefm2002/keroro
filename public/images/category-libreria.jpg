@@ -1,0 +1,16 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="libreriaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#libreriaGrad)" rx="16"/>
+  <rect x="50" y="50" width="300" height="200" fill="#ffffff" rx="8" opacity="0.95"/>
+  <rect x="130" y="100" width="140" height="80" fill="#10b981" rx="4"/>
+  <rect x="140" y="110" width="30" height="60" fill="#ffffff" rx="2"/>
+  <rect x="180" y="110" width="30" height="60" fill="#fbbf24" rx="2"/>
+  <rect x="220" y="110" width="30" height="60" fill="#ec4899" rx="2"/>
+  <rect x="260" y="110" width="30" height="60" fill="#3b82f6" rx="2"/>
+  <text x="200" y="230" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#1f2937" text-anchor="middle">LIBRERÍA</text>
+</svg>

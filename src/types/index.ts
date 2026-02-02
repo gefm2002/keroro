@@ -2,6 +2,7 @@ export interface Category {
   id: string
   name: string
   slug: string
+  image?: string | null
   order_index: number
   is_active: boolean
   created_at: string

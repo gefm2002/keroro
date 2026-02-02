@@ -160,12 +160,24 @@ export default function Home() {
                 <Link
                   key={cat.id}
                   to={`/productos?category=${cat.slug}`}
-                  className="bg-surface rounded-xl p-6 text-center hover:shadow-soft transition-all hover:-translate-y-1"
+                  className="bg-surface rounded-xl overflow-hidden hover:shadow-soft transition-all hover:-translate-y-1 group"
                 >
-                  <div className="w-16 h-16 bg-primary-100 rounded-full mx-auto mb-3 flex items-center justify-center">
-                    <span className="text-2xl">📦</span>
+                  <div className="aspect-square overflow-hidden bg-bg">
+                    {cat.image ? (
+                      <img
+                        src={cat.image}
+                        alt={cat.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-primary-100 flex items-center justify-center">
+                        <span className="text-4xl">📦</span>
+                      </div>
+                    )}
                   </div>
-                  <h3 className="font-semibold text-text">{cat.name}</h3>
+                  <div className="p-4 text-center">
+                    <h3 className="font-semibold text-text group-hover:text-primary transition-colors">{cat.name}</h3>
+                  </div>
                 </Link>
               ))}
             </div>

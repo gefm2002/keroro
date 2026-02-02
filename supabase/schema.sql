@@ -15,6 +15,7 @@ CREATE TABLE keroro_categories (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   name TEXT NOT NULL,
   slug TEXT UNIQUE NOT NULL,
+  image TEXT,
   order_index INT DEFAULT 0,
   is_active BOOLEAN DEFAULT true,
   created_at TIMESTAMPTZ DEFAULT NOW()
@@ -153,19 +154,19 @@ INSERT INTO keroro_users (email, password_hash, role) VALUES
 ON CONFLICT (email) DO NOTHING;
 
 -- Categorías
-INSERT INTO keroro_categories (name, slug, order_index) VALUES
-('Albums Kpop', 'albums-kpop', 1),
-('Lomo Cards', 'lomo-cards', 2),
-('Indumentaria', 'indumentaria', 3),
-('Accesorios', 'accesorios', 4),
-('Peluches', 'peluches', 5),
-('Lightstick', 'lightstick', 6),
-('Funko Pop', 'funko-pop', 7),
-('Figuras', 'figuras', 8),
-('Mochilas', 'mochilas', 9),
-('Librería', 'libreria', 10),
-('Libros', 'libros', 11),
-('Cajas Sorpresa', 'cajas-sorpresa', 12)
+INSERT INTO keroro_categories (name, slug, image, order_index) VALUES
+('Albums Kpop', 'albums-kpop', '/images/category-albums-kpop.jpg', 1),
+('Lomo Cards', 'lomo-cards', '/images/category-lomo-cards.jpg', 2),
+('Indumentaria', 'indumentaria', '/images/category-indumentaria.jpg', 3),
+('Accesorios', 'accesorios', '/images/category-accesorios.jpg', 4),
+('Peluches', 'peluches', '/images/category-peluches.jpg', 5),
+('Lightstick', 'lightstick', '/images/category-lightstick.jpg', 6),
+('Funko Pop', 'funko-pop', '/images/category-funko-pop.jpg', 7),
+('Figuras', 'figuras', '/images/category-figuras.jpg', 8),
+('Mochilas', 'mochilas', '/images/category-mochilas.jpg', 9),
+('Librería', 'libreria', '/images/category-libreria.jpg', 10),
+('Libros', 'libros', '/images/category-libros.jpg', 11),
+('Cajas Sorpresa', 'cajas-sorpresa', '/images/category-cajas-sorpresa.jpg', 12)
 ON CONFLICT (slug) DO NOTHING;
 
 -- Subcategorías

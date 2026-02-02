@@ -13,6 +13,7 @@ export default function AdminCategorias() {
   const [formData, setFormData] = useState({
     name: '',
     slug: '',
+    image: '',
     order_index: 0,
     is_active: true,
   })
@@ -76,6 +77,7 @@ export default function AdminCategorias() {
     setFormData({
       name: category.name,
       slug: category.slug,
+      image: category.image || '',
       order_index: category.order_index,
       is_active: category.is_active,
     })
@@ -86,6 +88,7 @@ export default function AdminCategorias() {
     setFormData({
       name: '',
       slug: '',
+      image: '',
       order_index: 0,
       is_active: true,
     })
@@ -117,6 +120,7 @@ export default function AdminCategorias() {
           <table className="w-full">
             <thead className="bg-bg">
               <tr>
+                <th className="px-6 py-3 text-left text-sm font-semibold text-text">Imagen</th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-text">Nombre</th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-text">Slug</th>
                 <th className="px-6 py-3 text-left text-sm font-semibold text-text">Orden</th>
@@ -127,6 +131,13 @@ export default function AdminCategorias() {
             <tbody className="divide-y divide-primary-100">
               {categories.map((category) => (
                 <tr key={category.id} className="hover:bg-bg transition-colors">
+                  <td className="px-6 py-4">
+                    {category.image ? (
+                      <img src={category.image} alt={category.name} className="w-16 h-16 object-cover rounded-lg" />
+                    ) : (
+                      <div className="w-16 h-16 bg-bg rounded-lg flex items-center justify-center text-muted text-xs">Sin imagen</div>
+                    )}
+                  </td>
                   <td className="px-6 py-4 font-medium text-text">{category.name}</td>
                   <td className="px-6 py-4 text-muted">{category.slug}</td>
                   <td className="px-6 py-4 text-text">{category.order_index}</td>
@@ -206,6 +217,22 @@ export default function AdminCategorias() {
                   required
                   className="w-full px-4 py-2 bg-bg border border-primary-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-text mb-2">URL de imagen</label>
+                <input
+                  type="text"
+                  value={formData.image}
+                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                  placeholder="/images/category-..."
+                  className="w-full px-4 py-2 bg-bg border border-primary-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                {formData.image && (
+                  <div className="mt-2">
+                    <img src={formData.image} alt="Preview" className="w-32 h-24 object-cover rounded-lg border border-primary-200" />
+                  </div>
+                )}
               </div>
 
               <div>
