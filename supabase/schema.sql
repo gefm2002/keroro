@@ -148,9 +148,9 @@ CREATE TRIGGER check_max_images BEFORE INSERT ON keroro_product_images
 -- Seeds mínimos
 -- Usuario admin (password: keroro123 hasheado con bcrypt)
 -- Para generar un nuevo hash: usar bcrypt con salt rounds 10
--- Hash de "keroro123": $2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy
+-- Hash de "keroro123": $2a$10$gg3GeHw50pvh7/W1VBoC.uJ2n0nBw7uhTHnTsjTGxWPEA1/wwyWkm
 INSERT INTO keroro_users (email, password_hash, role) VALUES
-('admin@keroro.store', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'admin')
+('admin@keroro.store', '$2a$10$gg3GeHw50pvh7/W1VBoC.uJ2n0nBw7uhTHnTsjTGxWPEA1/wwyWkm', 'admin')
 ON CONFLICT (email) DO NOTHING;
 
 -- Categorías
