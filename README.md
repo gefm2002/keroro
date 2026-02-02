@@ -79,17 +79,19 @@ En Netlify, ir a Site settings > Environment variables y agregar:
 
 Netlify detectará automáticamente el build command y public directory desde `netlify.toml`.
 
-## Acceso Admin
+## 🔐 Acceso Admin
 
 ### URL del Admin
-- **Local**: http://localhost:5173/admin
+- **Local (desarrollo)**: http://localhost:5173/admin
 - **Producción**: https://tu-sitio.netlify.app/admin (después del deploy)
 
 ### Credenciales por defecto
-- **Email**: `admin@keroro.store`
-- **Password**: `keroro123`
+```
+Email: admin@keroro.store
+Password: keroro123
+```
 
-⚠️ **Importante**: 
+⚠️ **IMPORTANTE**: 
 - El hash de la contraseña en `schema.sql` es un placeholder. Para generar el hash correcto:
   1. Instalar bcrypt: `npm install bcryptjs`
   2. Ejecutar en Node.js:
@@ -100,6 +102,8 @@ Netlify detectará automáticamente el build command y public directory desde `n
   3. Reemplazar el hash en `schema.sql` antes de ejecutarlo
 - **Cambiar la contraseña después del primer login en producción**
 - Si usás el script `migrations.sql`, el usuario se creará automáticamente
+
+📄 Ver `CREDENCIALES.md` para más detalles sobre el acceso admin.
 
 ## Estructura del proyecto
 
