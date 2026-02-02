@@ -79,10 +79,15 @@ En Netlify, ir a Site settings > Environment variables y agregar:
 
 Netlify detectará automáticamente el build command y public directory desde `netlify.toml`.
 
-## Usuario Admin por defecto
+## Acceso Admin
 
-- **Email**: admin@keroro.store
-- **Password**: keroro123
+### URL del Admin
+- **Local**: http://localhost:5173/admin
+- **Producción**: https://tu-sitio.netlify.app/admin (después del deploy)
+
+### Credenciales por defecto
+- **Email**: `admin@keroro.store`
+- **Password**: `keroro123`
 
 ⚠️ **Importante**: 
 - El hash de la contraseña en `schema.sql` es un placeholder. Para generar el hash correcto:
@@ -93,7 +98,8 @@ Netlify detectará automáticamente el build command y public directory desde `n
      console.log(bcrypt.hashSync('keroro123', 10));
      ```
   3. Reemplazar el hash en `schema.sql` antes de ejecutarlo
-- Cambiar la contraseña después del primer login en producción
+- **Cambiar la contraseña después del primer login en producción**
+- Si usás el script `migrations.sql`, el usuario se creará automáticamente
 
 ## Estructura del proyecto
 
