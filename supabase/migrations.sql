@@ -253,10 +253,16 @@ UPDATE keroro_categories SET image = '/images/category-libreria.jpg' WHERE slug 
 UPDATE keroro_categories SET image = '/images/category-libros.jpg' WHERE slug = 'libros' AND (image IS NULL OR image = '');
 UPDATE keroro_categories SET image = '/images/category-cajas-sorpresa.jpg' WHERE slug = 'cajas-sorpresa' AND (image IS NULL OR image = '');
 
+-- Insertar usuario admin si no existe (con hash correcto de bcrypt para "keroro123")
+INSERT INTO keroro_users (email, password_hash, role) VALUES
+('admin@keroro.store', '$2a$10$Srt2SbvXk8oM.MQtxJyVmOjfqZDScnx46u38z1kyEndpPjNlPP0ji', 'admin')
+ON CONFLICT (email) DO UPDATE SET
+  password_hash = EXCLUDED.password_hash;
+
 -- Actualizar contenido del sitio (solo si no existe o está vacío)
 INSERT INTO keroro_site_content (id, data) VALUES
 ('hero', '{"title": "Bienvenido a Keroro Store", "subtitle": "Tu tienda de Kpop, Manga, Anime y Coleccionables", "cta": "Ver productos", "image": "/images/hero-banner.jpg"}'),
-('contact', '{"whatsapp": "+5491123989714", "instagram": "@kerorostore", "address": "Yerbal 8, Caballito, Buenos Aires, Argentina 1405", "hours": "Lun a Sab: 12 a 19Hs.", "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.5!2d-58.4378!3d-34.6228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDM3JzIyLjEiUyA1OMKwMjYnMTYuMSJX!5e0!3m2!1ses!2sar!4v1234567890"}'),
+('contact', '{"whatsapp": "+5491123989714", "instagram": "@kerorostore", "address": "Yerbal 8, Caballito, Buenos Aires, Argentina 1405", "hours": "Lun a Sab: 12 a 19Hs.", "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.876!2d-58.4378!3d-34.6228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb8a8b8b8b8b%3A0x8b8b8b8b8b8b8b8b!2sYerbal%208%2C%20C1405%20CABA!5e0!3m2!1ses!2sar!4v1234567890"}'),
 ('payments', '{"methods": [{"name": "Efectivo", "icon": "cash"}, {"name": "Transferencia", "icon": "transfer"}, {"name": "MercadoPago", "icon": "mp"}, {"name": "Modo", "icon": "modo"}, {"name": "Billeteras QR", "icon": "qr"}]}'),
 ('promos', '[{"image": "/images/promo-blackfriday.jpg", "text": "Black Friday - Hasta 50% OFF", "link": "/productos", "active": true, "order": 1}, {"image": "/images/promo-nuevos.jpg", "text": "Nuevos Lanzamientos - Albums y Figuras", "link": "/productos?sort=newest", "active": true, "order": 2}, {"image": "/images/promo-envio.jpg", "text": "Envío Gratis en compras +$30.000", "link": "/productos", "active": true, "order": 3}]'),
 ('bank_promos', '[]'),

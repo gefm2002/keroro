@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../utils/supabase'
-import { ContactData } from '../types'
-import { MessageCircle, Instagram, MapPin, Clock, Send } from 'lucide-react'
+import { ContactData, PaymentMethod } from '../types'
+import { MessageCircle, Instagram, MapPin, Clock, Send, CreditCard } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 export default function Contacto() {
@@ -84,8 +84,23 @@ export default function Contacto() {
     )
   }
 
+  if (!contact) {
+    return (
+      <div className="min-h-screen bg-bg py-16">
+        <div className="container mx-auto px-4">
+          <div className="animate-pulse space-y-4">
+            <div className="h-8 bg-surface rounded w-64" />
+            <div className="h-32 bg-surface rounded" />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   const whatsappNumber = contact.whatsapp.replace(/\D/g, '')
-  const mapUrl = (contact as any).mapUrl || `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.5!2d-58.4378!3d-34.6228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDM3JzIyLjEiUyA1OMKwMjYnMTYuMSJX!5e0!3m2!1ses!2sar!4v1234567890`
+  // URL de Google Maps para Yerbal 8, Caballito, Buenos Aires
+  // Usando una URL de embed simple sin API key
+  const mapUrl = (contact as any).mapUrl || `https://www.google.com/maps?q=Yerbal+8,+Caballito,+Buenos+Aires,+Argentina&output=embed`
 
   return (
     <div className="min-h-screen bg-bg py-16">
@@ -244,11 +259,19 @@ export default function Contacto() {
           </div>
         </div>
 
+        {/* Medios de pago */}
+        <div id="medios-pago" className="bg-surface rounded-xl p-8 border border-primary-100 mb-12 scroll-mt-24">
+          <h2 className="text-2xl font-display font-bold text-text mb-6">
+            Medios de pago
+          </h2>
+          <MediosDePago />
+        </div>
+
         {/* Mapa */}
         {contact.address && (
-          <div className="bg-surface rounded-xl p-8 border border-primary-100 mb-12">
+          <div id="como-llegar" className="bg-surface rounded-xl p-8 border border-primary-100 mb-12 scroll-mt-24">
             <h2 className="text-2xl font-display font-bold text-text mb-6">
-              Cómo llegar
+              🏠 Cómo llegar
             </h2>
             <div className="aspect-video rounded-lg overflow-hidden">
               <iframe
@@ -276,13 +299,46 @@ export default function Contacto() {
         )}
 
         {/* FAQs */}
-        <div className="bg-surface rounded-xl p-8 border border-primary-100">
+        <div id="faqs" className="bg-surface rounded-xl p-8 border border-primary-100 scroll-mt-24">
           <h2 className="text-3xl font-display font-bold text-text text-center mb-12">
             Preguntas frecuentes
           </h2>
           <ContactFAQs />
         </div>
       </div>
+    </div>
+  )
+}
+
+function MediosDePago() {
+  const [payments, setPayments] = useState<PaymentMethod[]>([])
+
+  useEffect(() => {
+    async function loadPayments() {
+      const { data } = await supabase
+        .from('keroro_site_content')
+        .select('data')
+        .eq('id', 'payments')
+        .single()
+      
+      if (data?.data?.methods) {
+        setPayments(data.data.methods)
+      }
+    }
+    loadPayments()
+  }, [])
+
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+      {payments.map((payment, idx) => (
+        <div
+          key={idx}
+          className="bg-bg rounded-xl p-4 border border-primary-100 text-center hover:shadow-soft transition-all"
+        >
+          <CreditCard className="w-8 h-8 text-primary mx-auto mb-2" />
+          <p className="font-medium text-text">{payment.name}</p>
+        </div>
+      ))}
     </div>
   )
 }

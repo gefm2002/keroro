@@ -51,6 +51,7 @@ export default function HeaderSticky() {
     <>
       <header
         className="fixed top-0 left-0 right-0 z-50 bg-surface shadow-soft transition-all duration-300"
+        style={{ backgroundColor: 'var(--color-surface)' }}
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20">
@@ -91,7 +92,7 @@ export default function HeaderSticky() {
                   Productos
                 </button>
                 {isMegaMenuOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-[600px] bg-surface rounded-xl shadow-soft border border-primary-100 p-6">
+                  <div className="absolute top-full left-0 mt-2 w-[600px] bg-surface rounded-xl shadow-soft border border-primary-100 p-6 z-50">
                     <div className="grid grid-cols-3 gap-6">
                       {categories.map((cat) => (
                         <div key={cat.id}>
@@ -120,6 +121,15 @@ export default function HeaderSticky() {
                   </div>
                 )}
               </div>
+              <Link to="/contacto#medios-pago" className="text-text hover:text-primary font-medium transition-colors">
+                Medios de pago
+              </Link>
+              <Link to="/contacto#faqs" className="text-text hover:text-primary font-medium transition-colors">
+                FAQs
+              </Link>
+              <Link to="/contacto#como-llegar" className="text-text hover:text-primary font-medium transition-colors">
+                Cómo llegar
+              </Link>
               <Link to="/contacto" className="text-text hover:text-primary font-medium transition-colors">
                 Contacto
               </Link>
@@ -180,6 +190,27 @@ export default function HeaderSticky() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Productos
+              </Link>
+              <Link
+                to="/contacto#medios-pago"
+                className="block font-semibold text-text hover:text-primary"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Medios de pago
+              </Link>
+              <Link
+                to="/contacto#faqs"
+                className="block font-semibold text-text hover:text-primary"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                FAQs
+              </Link>
+              <Link
+                to="/contacto#como-llegar"
+                className="block font-semibold text-text hover:text-primary"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Cómo llegar
               </Link>
               <Link
                 to="/contacto"
