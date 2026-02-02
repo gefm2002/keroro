@@ -131,7 +131,7 @@ export default function Home() {
                     alt={promo.text}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent flex items-end p-4" style={{ opacity: 1 }}>
+                  <div className="absolute inset-0 bg-black flex items-end p-4" style={{ opacity: 0.8 }}>
                     <p className="text-white font-semibold">{promo.text}</p>
                   </div>
                 </a>

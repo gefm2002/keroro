@@ -115,7 +115,7 @@ export default function ProductoDetalle() {
                     className={`aspect-square rounded-lg overflow-hidden border-2 transition-all ${
                       selectedImageIndex === idx
                         ? 'border-primary'
-                        : 'border-transparent hover:border-primary-200'
+                        : 'border-primary-200 hover:border-primary-300'
                     }`}
                   >
                     <img
