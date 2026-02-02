@@ -20,16 +20,39 @@ export const handler: Handler = async (event) => {
       }
     }
 
+    // Verificar variables de entorno
+    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ message: 'Error de configuración del servidor' }),
+      }
+    }
+
     const { data: user, error } = await supabaseAdmin
       .from('keroro_users')
       .select('*')
       .eq('email', email)
       .single()
 
-    if (error || !user) {
+    if (error) {
+      console.error('Error al buscar usuario:', error)
+      return {
+        statusCode: 401,
+        body: JSON.stringify({ message: 'Credenciales inválidas', debug: error.message }),
+      }
+    }
+
+    if (!user) {
       return {
         statusCode: 401,
         body: JSON.stringify({ message: 'Credenciales inválidas' }),
+      }
+    }
+
+    if (!user.password_hash) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ message: 'Error: usuario sin contraseña configurada' }),
       }
     }
 
@@ -52,9 +75,10 @@ export const handler: Handler = async (event) => {
       body: JSON.stringify({ token, user: { id: user.id, email: user.email, role: user.role } }),
     }
   } catch (error: any) {
+    console.error('Error en login:', error)
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: error.message || 'Error del servidor' }),
+      body: JSON.stringify({ message: error.message || 'Error del servidor', debug: error.stack }),
     }
   }
 }

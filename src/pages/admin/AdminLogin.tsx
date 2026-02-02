@@ -14,15 +14,29 @@ export default function AdminLogin() {
     setLoading(true)
 
     try {
-      const { token } = await apiRequest<{ token: string }>('/login', {
+      const response = await fetch(`${import.meta.env.DEV ? 'http://localhost:8888/.netlify/functions' : '/.netlify/functions'}/login`, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ email, password }),
       })
 
-      localStorage.setItem('admin_token', token)
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.message || `Error ${response.status}`)
+      }
+
+      if (!data.token) {
+        throw new Error('No se recibió token de autenticación')
+      }
+
+      localStorage.setItem('admin_token', data.token)
       toast.success('Sesión iniciada')
       navigate('/admin/dashboard')
     } catch (error: any) {
+      console.error('Error en login:', error)
       toast.error(error.message || 'Error al iniciar sesión')
     } finally {
       setLoading(false)

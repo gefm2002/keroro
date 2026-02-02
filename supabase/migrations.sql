@@ -255,7 +255,7 @@ UPDATE keroro_categories SET image = '/images/category-cajas-sorpresa.jpg' WHERE
 
 -- Insertar usuario admin si no existe (con hash correcto de bcrypt para "keroro123")
 INSERT INTO keroro_users (email, password_hash, role) VALUES
-('admin@keroro.store', '$2a$10$Srt2SbvXk8oM.MQtxJyVmOjfqZDScnx46u38z1kyEndpPjNlPP0ji', 'admin')
+('admin@keroro.store', '$2a$10$gg3GeHw50pvh7/W1VBoC.uJ2n0nBw7uhTHnTsjTGxWPEA1/wwyWkm', 'admin')
 ON CONFLICT (email) DO UPDATE SET
   password_hash = EXCLUDED.password_hash;
 
