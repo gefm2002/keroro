@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.DEV ? 'http://localhost:8888/.netlify/functions' : '/.netlify/functions'
+const API_BASE = (import.meta as any).env?.DEV ? 'http://localhost:8888/.netlify/functions' : '/.netlify/functions'
 
 export async function apiRequest<T>(
   endpoint: string,
@@ -6,9 +6,9 @@ export async function apiRequest<T>(
 ): Promise<T> {
   const token = localStorage.getItem('admin_token')
   
-  const headers: HeadersInit = {
+  const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-    ...options.headers,
+    ...(options.headers as Record<string, string>),
   }
   
   if (token) {

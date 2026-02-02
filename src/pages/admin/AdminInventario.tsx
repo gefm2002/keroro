@@ -3,7 +3,6 @@ import AdminLayout from '../../components/admin/AdminLayout'
 import { apiRequest } from '../../utils/api'
 import { Download, Upload, FileSpreadsheet } from 'lucide-react'
 import toast from 'react-hot-toast'
-import Papa from 'papaparse'
 
 export default function AdminInventario() {
   const [importing, setImporting] = useState(false)

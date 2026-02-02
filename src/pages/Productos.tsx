@@ -4,7 +4,6 @@ import { supabase } from '../utils/supabase'
 import { Product, Category, Subcategory } from '../types'
 import ProductCard from '../components/ProductCard'
 import { Filter, X } from 'lucide-react'
-import { useCartStore } from '../store/cartStore'
 
 export default function Productos() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -13,7 +12,6 @@ export default function Productos() {
   const [subcategories, setSubcategories] = useState<Subcategory[]>([])
   const [loading, setLoading] = useState(true)
   const [isFiltersOpen, setIsFiltersOpen] = useState(false)
-  const { openCart } = useCartStore()
 
   const categoryFilter = searchParams.get('category')
   const subcategoryFilter = searchParams.get('subcategory')

@@ -1,7 +1,7 @@
 import { X, Plus, Minus, Trash2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useCartStore } from '../store/cartStore'
-import { getCart, updateCartItemQuantity, removeFromCart, getCartTotal, clearCart } from '../utils/cart'
+import { getCart, updateCartItemQuantity, removeFromCart, getCartTotal } from '../utils/cart'
 import { formatPrice } from '../utils/format'
 import { getImageUrl } from '../utils/images'
 import { useEffect, useState } from 'react'

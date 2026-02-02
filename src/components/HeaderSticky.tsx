@@ -6,7 +6,6 @@ import { supabase } from '../utils/supabase'
 import { useCartStore } from '../store/cartStore'
 
 export default function HeaderSticky() {
-  const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -15,13 +14,6 @@ export default function HeaderSticky() {
   const { openCart } = useCartStore()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   useEffect(() => {
     async function loadCategories() {

@@ -264,7 +264,7 @@ function ProductModal({
       const reader = new FileReader()
       reader.onloadend = async () => {
         const base64 = (reader.result as string).split(',')[1]
-        const { url, storage_path } = await apiRequest<{ url: string; storage_path: string }>(
+        const { storage_path } = await apiRequest<{ url: string; storage_path: string }>(
           '/upload-image',
           {
             method: 'POST',
@@ -343,7 +343,7 @@ function ProductModal({
                 className="w-full px-4 py-2 bg-bg border border-primary-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">Seleccionar...</option>
-                {categories.map((cat) => (
+                {categories.map((cat: any) => (
                   <option key={cat.id} value={cat.id}>
                     {cat.name}
                   </option>
@@ -359,7 +359,7 @@ function ProductModal({
                 className="w-full px-4 py-2 bg-bg border border-primary-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value="">Ninguna</option>
-                {subcategories.map((sub) => (
+                {subcategories.map((sub: any) => (
                   <option key={sub.id} value={sub.id}>
                     {sub.name}
                   </option>

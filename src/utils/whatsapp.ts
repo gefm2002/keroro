@@ -9,7 +9,7 @@ export interface CheckoutData {
   shippingPreference: 'pickup' | 'local' | 'shipping'
 }
 
-export function generateWhatsAppMessage(data: CheckoutData, whatsappNumber: string): string {
+export function generateWhatsAppMessage(data: CheckoutData): string {
   const total = data.items.reduce((sum, item) => sum + item.finalPrice * item.quantity, 0)
   
   let message = `🛒 *Nuevo Pedido - Keroro Store*\n\n`
@@ -44,7 +44,7 @@ export function generateWhatsAppMessage(data: CheckoutData, whatsappNumber: stri
 }
 
 export function openWhatsApp(data: CheckoutData, whatsappNumber: string): void {
-  const message = generateWhatsAppMessage(data, whatsappNumber)
+  const message = generateWhatsAppMessage(data)
   const url = `https://wa.me/${whatsappNumber.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`
   window.open(url, '_blank')
 }
