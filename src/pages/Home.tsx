@@ -95,7 +95,7 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-100 to-primary-50 py-20 md:py-32">
-        <div className="absolute inset-0 wave-pattern opacity-50" />
+        <div className="absolute inset-0 wave-pattern" style={{ opacity: 1 }} />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-display font-bold text-text mb-4">
@@ -131,7 +131,7 @@ export default function Home() {
                     alt={promo.text}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent flex items-end p-4" style={{ opacity: 1 }}>
                     <p className="text-white font-semibold">{promo.text}</p>
                   </div>
                 </a>

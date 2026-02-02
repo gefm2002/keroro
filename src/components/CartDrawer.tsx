@@ -45,8 +45,9 @@ export default function CartDrawer() {
   return (
     <>
       <div
-        className="fixed inset-0 bg-black/80 z-50 transition-opacity"
+        className="fixed inset-0 bg-black z-50 transition-opacity"
         onClick={closeCart}
+        style={{ opacity: 1 }}
       />
       <div className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-surface z-50 shadow-2xl flex flex-col transform transition-transform border-l border-primary-100">
         <div className="flex items-center justify-between p-4 border-b border-primary-100">

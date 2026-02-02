@@ -172,7 +172,7 @@ export default function AdminCategorias() {
       )}
 
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black z-50 flex items-center justify-center p-4" style={{ opacity: 1 }}>
           <div className="bg-surface rounded-xl max-w-md w-full">
             <div className="p-6 border-b border-primary-100 flex items-center justify-between">
               <h2 className="text-2xl font-display font-bold text-text">
