@@ -22,10 +22,19 @@ export default function AdminLogin() {
         body: JSON.stringify({ email, password }),
       })
 
-      const data = await response.json()
+      let data
+      try {
+        data = await response.json()
+      } catch {
+        throw new Error(`Error ${response.status}: No se pudo parsear la respuesta del servidor`)
+      }
 
       if (!response.ok) {
-        throw new Error(data.message || `Error ${response.status}`)
+        // Mostrar mensaje más descriptivo si hay información de debug
+        const errorMsg = data.debug 
+          ? `${data.message}\n\nDetalles: ${data.debug}`
+          : data.message || `Error ${response.status}`
+        throw new Error(errorMsg)
       }
 
       if (!data.token) {

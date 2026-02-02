@@ -26,11 +26,18 @@ export const handler: Handler = async (event) => {
       supabaseAdmin = getSupabaseAdmin()
     } catch (envError: any) {
       console.error('Error de configuración:', envError)
+      console.error('SUPABASE_URL:', process.env.SUPABASE_URL ? 'Definida' : 'FALTANTE')
+      console.error('SUPABASE_SERVICE_ROLE_KEY:', process.env.SUPABASE_SERVICE_ROLE_KEY ? 'Definida' : 'FALTANTE')
       return {
         statusCode: 500,
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ 
-          message: 'Error de configuración del servidor',
-          debug: envError.message 
+          message: 'Error de configuración del servidor. Verifica las variables de entorno en Netlify: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, JWT_SECRET',
+          debug: envError.message,
+          hasSupabaseUrl: !!process.env.SUPABASE_URL,
+          hasServiceKey: !!process.env.SUPABASE_SERVICE_ROLE_KEY,
         }),
       }
     }
