@@ -67,13 +67,18 @@ npm run netlify:dev
 
 ### 2. Configurar variables de entorno
 
-En Netlify, ir a Site settings > Environment variables y agregar:
+En Netlify, ir a **Site settings > Environment variables** y agregar:
 
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_ANON_KEY`
-- `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `JWT_SECRET` (generar uno aleatorio y seguro)
+**Variables para el frontend (VITE_*):**
+- `VITE_SUPABASE_URL` - URL de tu proyecto Supabase
+- `VITE_SUPABASE_ANON_KEY` - Clave anónima de Supabase
+
+**Variables para Netlify Functions (CRÍTICAS):**
+- `SUPABASE_URL` - URL de tu proyecto Supabase (mismo que VITE_SUPABASE_URL)
+- `SUPABASE_SERVICE_ROLE_KEY` - Clave de servicio de Supabase (⚠️ NO usar la anon key)
+- `JWT_SECRET` - Secreto para firmar tokens JWT (generar uno aleatorio y seguro)
+
+⚠️ **IMPORTANTE**: Sin estas variables, las funciones de Netlify (login, admin, etc.) fallarán con error 502.
 
 ### 3. Deploy
 

@@ -1,5 +1,5 @@
 import { Handler } from '@netlify/functions'
-import { supabaseAdmin } from './_lib/supabaseAdmin'
+import { getSupabaseAdmin } from './_lib/supabaseAdmin'
 import { comparePassword, signToken } from './_lib/auth'
 
 export const handler: Handler = async (event) => {
@@ -20,11 +20,18 @@ export const handler: Handler = async (event) => {
       }
     }
 
-    // Verificar variables de entorno
-    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    // Obtener cliente de Supabase (con manejo de errores)
+    let supabaseAdmin
+    try {
+      supabaseAdmin = getSupabaseAdmin()
+    } catch (envError: any) {
+      console.error('Error de configuración:', envError)
       return {
         statusCode: 500,
-        body: JSON.stringify({ message: 'Error de configuración del servidor' }),
+        body: JSON.stringify({ 
+          message: 'Error de configuración del servidor',
+          debug: envError.message 
+        }),
       }
     }
 

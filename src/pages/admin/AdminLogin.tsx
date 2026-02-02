@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { apiRequest } from '../../utils/api'
 import toast from 'react-hot-toast'
 
 export default function AdminLogin() {
@@ -14,7 +13,8 @@ export default function AdminLogin() {
     setLoading(true)
 
     try {
-      const response = await fetch(`${import.meta.env.DEV ? 'http://localhost:8888/.netlify/functions' : '/.netlify/functions'}/login`, {
+      const API_BASE = (import.meta as any).env?.DEV ? 'http://localhost:8888/.netlify/functions' : '/.netlify/functions'
+      const response = await fetch(`${API_BASE}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,6 +60,7 @@ export default function AdminLogin() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
               required
               className="w-full px-4 py-2 bg-bg border border-primary-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             />
@@ -73,6 +74,7 @@ export default function AdminLogin() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
               required
               className="w-full px-4 py-2 bg-bg border border-primary-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             />
