@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 
-const JWT_SECRET = process.env.JWT_SECRET || 'change-me-in-production'
+// JWT_SECRET: usar el que esté configurado, o un valor por defecto (no seguro para producción)
+const JWT_SECRET = process.env.JWT_SECRET || process.env.VITE_SUPABASE_ANON_KEY?.substring(0, 32) || 'keroro-store-default-secret-key-2024'
 
 export interface TokenPayload {
   userId: string
@@ -29,23 +30,39 @@ export async function comparePassword(password: string, hash: string): Promise<b
   return bcrypt.compare(password, hash)
 }
 
-export function getAuthToken(req: Request): string | null {
-  const authHeader = req.headers.get('authorization')
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+export function getAuthTokenFromEvent(event: any): string | null {
+  // Netlify Functions: event.headers puede ser objeto con keys case-insensitive
+  if (!event.headers) {
     return null
   }
-  return authHeader.substring(7)
+
+  // Buscar authorization en diferentes formatos
+  const authHeader = 
+    event.headers.authorization || 
+    event.headers.Authorization ||
+    event.headers.AUTHORIZATION ||
+    (event.multiValueHeaders?.authorization?.[0]) ||
+    (event.multiValueHeaders?.Authorization?.[0])
+
+  if (authHeader && typeof authHeader === 'string' && authHeader.startsWith('Bearer ')) {
+    return authHeader.substring(7).trim()
+  }
+  
+  return null
 }
 
-export function requireAuth(req: Request): TokenPayload {
-  const token = getAuthToken(req)
+export function requireAuth(event: any): TokenPayload {
+  const token = getAuthTokenFromEvent(event)
+  
   if (!token) {
-    throw new Error('No autorizado')
+    console.error('No se encontró token en headers:', event.headers)
+    throw new Error('No autorizado: token faltante')
   }
   
   const payload = verifyToken(token)
   if (!payload) {
-    throw new Error('Token inválido')
+    console.error('Token inválido o expirado')
+    throw new Error('Token inválido o expirado')
   }
   
   return payload

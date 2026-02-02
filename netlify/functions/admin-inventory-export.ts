@@ -5,11 +5,15 @@ import Papa from 'papaparse'
 
 export const handler: Handler = async (event) => {
   try {
-    requireAuth(event as any)
-  } catch {
+    requireAuth(event)
+  } catch (error: any) {
+    console.error('Error de autenticación:', error)
     return {
       statusCode: 401,
-      body: JSON.stringify({ message: 'No autorizado' }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: error.message || 'No autorizado' }),
     }
   }
 
