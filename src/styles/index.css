@@ -5,7 +5,7 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-primary-200;
   }
   body {
     @apply bg-bg text-text font-sans antialiased;

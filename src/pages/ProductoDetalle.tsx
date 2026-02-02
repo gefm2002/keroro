@@ -4,6 +4,7 @@ import { supabase } from '../utils/supabase'
 import { Product } from '../types'
 import { formatPrice, calculateFinalPrice } from '../utils/format'
 import { addToCart } from '../utils/cart'
+import { getImageUrl } from '../utils/images'
 import toast from 'react-hot-toast'
 import { ChevronLeft, Plus, Minus, ShoppingCart } from 'lucide-react'
 
@@ -64,7 +65,7 @@ export default function ProductoDetalle() {
   )
   const hasOffer = product.offer_type !== 'none' && finalPrice < product.price
   const images = product.images || []
-  const mainImage = images[selectedImageIndex]?.storage_path || '/images/placeholder.jpg'
+  const mainImage = getImageUrl(images[selectedImageIndex]?.storage_path)
 
   const handleAddToCart = () => {
     if (product.is_out_of_stock) {
@@ -78,7 +79,7 @@ export default function ProductoDetalle() {
         slug: product.slug,
         price: product.price,
         finalPrice,
-        image: images[0]?.storage_path || '/images/placeholder.jpg',
+        image: getImageUrl(images[0]?.storage_path),
       })
     }
     toast.success(`Agregado${quantity > 1 ? 's' : ''} al carrito`)
@@ -118,7 +119,7 @@ export default function ProductoDetalle() {
                     }`}
                   >
                     <img
-                      src={img.storage_path}
+                      src={getImageUrl(img.storage_path)}
                       alt={img.alt || product.name}
                       className="w-full h-full object-cover"
                     />

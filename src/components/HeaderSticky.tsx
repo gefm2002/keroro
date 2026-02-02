@@ -50,11 +50,7 @@ export default function HeaderSticky() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-surface shadow-soft backdrop-blur-sm'
-            : 'bg-surface/95 backdrop-blur-sm'
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 bg-surface shadow-soft transition-all duration-300"
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16 md:h-20">
@@ -152,7 +148,7 @@ export default function HeaderSticky() {
 
               {/* WhatsApp */}
               <a
-                href="https://wa.me/5491112345678"
+                href="https://wa.me/5491123989714"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden md:flex items-center space-x-2 bg-primary text-white px-4 py-2 rounded-xl hover:bg-primary-600 transition-colors"
@@ -191,7 +187,7 @@ export default function HeaderSticky() {
                 Contacto
               </Link>
               <a
-                href="https://wa.me/5491112345678"
+                href="https://wa.me/5491123989714"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2 text-primary font-semibold"

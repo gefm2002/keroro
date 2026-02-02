@@ -3,6 +3,7 @@ import { Star } from 'lucide-react'
 import { Product } from '../types'
 import { formatPrice, calculateFinalPrice } from '../utils/format'
 import { addToCart } from '../utils/cart'
+import { getImageUrl } from '../utils/images'
 import toast from 'react-hot-toast'
 
 interface ProductCardProps {
@@ -16,7 +17,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     product.offer_value
   )
   const hasOffer = product.offer_type !== 'none' && finalPrice < product.price
-  const mainImage = product.images?.[0]?.storage_path || '/images/placeholder.jpg'
+  const mainImage = getImageUrl(product.images?.[0]?.storage_path)
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()

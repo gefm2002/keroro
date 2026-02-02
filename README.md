@@ -84,7 +84,16 @@ Netlify detectará automáticamente el build command y public directory desde `n
 - **Email**: admin@keroro.store
 - **Password**: keroro123
 
-⚠️ **Importante**: Cambiar la contraseña después del primer login.
+⚠️ **Importante**: 
+- El hash de la contraseña en `schema.sql` es un placeholder. Para generar el hash correcto:
+  1. Instalar bcrypt: `npm install bcryptjs`
+  2. Ejecutar en Node.js:
+     ```js
+     const bcrypt = require('bcryptjs');
+     console.log(bcrypt.hashSync('keroro123', 10));
+     ```
+  3. Reemplazar el hash en `schema.sql` antes de ejecutarlo
+- Cambiar la contraseña después del primer login en producción
 
 ## Estructura del proyecto
 

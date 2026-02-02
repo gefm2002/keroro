@@ -88,4 +88,35 @@ BEGIN
    4500, 'fixed', 500, false, true, true)
   
   ON CONFLICT (slug) DO NOTHING;
+
+  -- Agregar imágenes a los productos (solo si no existen)
+  INSERT INTO keroro_product_images (product_id, storage_path, alt, order_index)
+  SELECT 
+    p.id,
+    CASE 
+      WHEN p.category_id = cat_albums_id THEN '/images/product-album.jpg'
+      WHEN p.category_id = cat_lomo_id THEN '/images/product-binder.jpg'
+      WHEN p.category_id = cat_indum_id THEN '/images/product-clothing.jpg'
+      WHEN p.category_id = cat_acc_id THEN '/images/product-accessory.jpg'
+      ELSE '/images/placeholder.jpg'
+    END,
+    p.name,
+    0
+  FROM keroro_products p
+  WHERE p.slug IN (
+    'bts-proof-album',
+    'blackpink-born-pink-album',
+    'bts-map-of-the-soul-7',
+    'binder-a5-lomo-cards',
+    'binder-a4-premium',
+    'pupera-bts-dynamite',
+    'remera-blackpink',
+    'pupera-newjeans',
+    'pack-stickers-kpop-mix',
+    'sticker-bts-set-completo'
+  )
+  AND NOT EXISTS (
+    SELECT 1 FROM keroro_product_images 
+    WHERE product_id = p.id
+  );
 END $$;

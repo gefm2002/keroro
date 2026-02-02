@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getCart, updateCartItemQuantity, removeFromCart, getCartTotal, clearCart } from '../utils/cart'
 import { formatPrice } from '../utils/format'
+import { getImageUrl } from '../utils/images'
 import { openWhatsApp } from '../utils/whatsapp'
 import { supabase } from '../utils/supabase'
 import { CartItem } from '../utils/cart'
@@ -12,8 +13,9 @@ import toast from 'react-hot-toast'
 export default function Carrito() {
   const [cart, setCart] = useState<CartItem[]>([])
   const [total, setTotal] = useState(0)
-  const [whatsapp, setWhatsapp] = useState('5491112345678')
+  const [whatsapp, setWhatsapp] = useState('5491123989714')
   const [showCheckout, setShowCheckout] = useState(false)
+
   const [checkoutData, setCheckoutData] = useState<CheckoutData>({
     items: [],
     customerName: '',
@@ -121,7 +123,7 @@ export default function Carrito() {
               >
                 <div className="flex gap-4">
                   <img
-                    src={item.image}
+                    src={getImageUrl(item.image)}
                     alt={item.name}
                     className="w-24 h-24 object-cover rounded-lg"
                   />

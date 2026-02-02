@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom'
 import { useCartStore } from '../store/cartStore'
 import { getCart, updateCartItemQuantity, removeFromCart, getCartTotal, clearCart } from '../utils/cart'
 import { formatPrice } from '../utils/format'
+import { getImageUrl } from '../utils/images'
 import { useEffect, useState } from 'react'
 
 export default function CartDrawer() {
   const { isOpen, closeCart } = useCartStore()
   const [cart, setCart] = useState(getCart())
   const [total, setTotal] = useState(getCartTotal())
+
 
   useEffect(() => {
     if (isOpen) {
@@ -46,7 +48,7 @@ export default function CartDrawer() {
         className="fixed inset-0 bg-black/50 z-50 transition-opacity"
         onClick={closeCart}
       />
-      <div className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-surface z-50 shadow-2xl flex flex-col transform transition-transform">
+      <div className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-surface z-50 shadow-2xl flex flex-col transform transition-transform border-l border-primary-100">
         <div className="flex items-center justify-between p-4 border-b border-primary-100">
           <h2 className="text-xl font-display font-bold text-text">Carrito</h2>
           <button
@@ -77,7 +79,7 @@ export default function CartDrawer() {
                   className="flex gap-4 p-4 bg-bg rounded-xl border border-primary-100"
                 >
                   <img
-                    src={item.image}
+                    src={getImageUrl(item.image)}
                     alt={item.name}
                     className="w-20 h-20 object-cover rounded-lg"
                   />

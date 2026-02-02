@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../utils/supabase'
 
 export default function WhatsAppFloat() {
-  const [whatsapp, setWhatsapp] = useState('5491112345678')
+  const [whatsapp, setWhatsapp] = useState('5491123989714')
 
   useEffect(() => {
     async function loadContact() {

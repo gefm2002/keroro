@@ -207,10 +207,10 @@ ON CONFLICT (category_id, slug) DO NOTHING;
 
 -- Contenido inicial del sitio
 INSERT INTO keroro_site_content (id, data) VALUES
-('hero', '{"title": "Bienvenido a Keroro Store", "subtitle": "Tu tienda de Kpop, Manga, Anime y Coleccionables", "cta": "Ver productos", "image": "/images/hero.jpg"}'),
-('contact', '{"whatsapp": "+5491112345678", "instagram": "@kerorostore", "address": "", "hours": ""}'),
+('hero', '{"title": "Bienvenido a Keroro Store", "subtitle": "Tu tienda de Kpop, Manga, Anime y Coleccionables", "cta": "Ver productos", "image": "/images/hero-banner.jpg"}'),
+('contact', '{"whatsapp": "+5491123989714", "instagram": "@kerorostore", "address": "", "hours": ""}'),
 ('payments', '{"methods": [{"name": "Efectivo", "icon": "cash"}, {"name": "Transferencia", "icon": "transfer"}, {"name": "MercadoPago", "icon": "mp"}, {"name": "Modo", "icon": "modo"}, {"name": "Billeteras QR", "icon": "qr"}]}'),
-('promos', '[]'),
+('promos', '[{"image": "/images/promo-blackfriday.jpg", "text": "Black Friday - Hasta 50% OFF", "link": "/productos", "active": true, "order": 1}, {"image": "/images/promo-nuevos.jpg", "text": "Nuevos Lanzamientos - Albums y Figuras", "link": "/productos?sort=newest", "active": true, "order": 2}, {"image": "/images/promo-envio.jpg", "text": "Envío Gratis en compras +$30.000", "link": "/productos", "active": true, "order": 3}]'),
 ('bank_promos', '[]'),
-('faqs', '[]')
+('faqs', '[{"question": "¿Hacen envíos?", "answer": "Sí, realizamos envíos a todo el país. También podés retirar en nuestro local."}, {"question": "¿Qué métodos de pago aceptan?", "answer": "Aceptamos efectivo, transferencia bancaria, MercadoPago, Modo y billeteras QR."}, {"question": "¿Los productos son originales?", "answer": "Sí, todos nuestros productos son 100% originales y oficiales."}, {"question": "¿Cuánto demora el envío?", "answer": "Los envíos suelen demorar entre 3 a 7 días hábiles dependiendo de la zona."}, {"question": "¿Puedo cambiar o devolver un producto?", "answer": "Sí, tenés 7 días para cambiar o devolver productos en perfecto estado."}, {"question": "¿Tienen stock disponible?", "answer": "El stock se actualiza en tiempo real. Si un producto aparece disponible, lo tenemos en stock."}]')
 ON CONFLICT (id) DO NOTHING;
